@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
@@ -19,6 +20,10 @@ db = SQLAlchemy(app)
 mail = Mail(app)
 bcrypt = Bcrypt(app)
 csrf = CSRFProtect(app)
+login_manager = LoginManager(app)
+
+login_manager.login_view = 'home.login'
+login_manager.session_protection = 'strong'
 
 
 # front

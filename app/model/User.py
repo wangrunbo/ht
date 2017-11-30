@@ -2,6 +2,7 @@ import random
 import string
 from sqlalchemy.ext.hybrid import hybrid_property
 from .. import db, bcrypt
+from .UserStatus import UserStatus
 
 
 class User(db.Model):
@@ -52,6 +53,21 @@ class User(db.Model):
             return True
 
         return False
+
+    def is_authenticated(self):
+        """一般而言，这个方法应该只返回 True，除非表示用户的对象因为某些原因不允许被认证"""
+        return True
+
+    def is_active(self):
+        """应该返回 True，除非是用户是无效的，比如因为他们的账号是被禁止"""
+        return self.user_status_id == UserStatus.GENERAL
+
+    def is_anonymous(self):
+        """应该返回 True，除非是伪造的用户不允许登录系统"""
+        return False
+
+    def get_id(self):
+        return str(self.id)
 
     @staticmethod
     def new_secret_key():

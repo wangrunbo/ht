@@ -17,9 +17,9 @@ def index():
     if form.validate_on_submit():
         user = User(
             uid=User.new_uid(),
-            email=form.data['email'],
-            username=form.data['username'],
-            password=form.data['password'],
+            email=form.email.data,
+            username=form.username.data,
+            password=form.password.data,
             secret_key=User.new_secret_key(),
             user_status_id=UserStatus.INACTIVE,
             registration_ip=request.remote_addr

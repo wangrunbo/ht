@@ -4,9 +4,9 @@ from wtforms.validators import DataRequired
 
 
 class LoginForm(Form):
-    username = StringField(
-        label='ユーザー名',
-        validators=[DataRequired(message='ユーザー名を入力してください')]
+    email = StringField(
+        label='メール',
+        validators=[DataRequired(message='メールを入力してください')]
     )
     password = PasswordField(
         label='パスワード',
